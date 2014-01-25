@@ -1,4 +1,4 @@
-rom_builder
+Marvellous CM10
 ===========
 
-Scripts and tools for building an Android ROM
+Scripts and tools for building Marvellous CM10
