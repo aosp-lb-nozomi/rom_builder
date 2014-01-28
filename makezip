@@ -2,7 +2,7 @@
 
 # a little setup
 BUILD_OUTPUT=~/*/out/target/product/marvel
-#ADDONS_DIR=./DV.addons
+ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%Y.%m.%d"`
 ZIPFILENAME=./cm-10-$TIMESTAMP-EXPERIMENTAL-marvel-MARVELLOUS-BETA0.zip
@@ -1377,6 +1377,19 @@ rm -rf ./system
 rm -f ./boot.img
 cp -r $BUILD_OUTPUT/system .
 cp $BUILD_OUTPUT/boot.img .
+
+# remove obsolete stuffz
+rm ./system/app/Apollo.apk
+rm ./system/app/CMFileManager.apk
+rm ./system/app/CMFileManagerThemes.apk
+rm ./system/app/ThemeChooser.apk
+rm ./system/app/ThemeManager.apk
+rm ./system/app/Trebuchet.apk
+rm -rf ./system/media
+
+# Copy some extra apps :) 
+# E.g. MDPI-HDPI ThemeChooser
+cp $ADDONS_DIR/app/* ./system/app
 
 # get rid of symlinks, but save them to a text file
 find ./system/bin -maxdepth 1 -type l -exec ls -lh {} \; > symlinks.txt
