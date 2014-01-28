@@ -3,7 +3,7 @@
 # a little setup
 BUILD_OUTPUT=~/*/out/target/product/marvel
 #ADDONS_DIR=./DV.addons
-TIMESTAMP=`date +"%Y%m%d-%H%M"`
+TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%Y.%m.%d"`
 ZIPFILENAME=./cm-10-$TIMESTAMP-EXPERIMENTAL-marvel-MARVELLOUS-BETA0.zip
 
