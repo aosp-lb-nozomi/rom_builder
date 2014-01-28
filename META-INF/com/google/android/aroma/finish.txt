@@ -1,0 +1,5 @@
+You may reboot your phone now.
+If the installation finished with <b><#selectbg_g>Status: 0</#></b>, the installation was succesful. Please note that everything else than Status 0 (e.g. Status 6) is NOT normal and should be reported!
+If the installation finished with <b><#selectbg_g>Status: 7</#></b> and some symlinks failed, your internal storage is full and you should try again but choose less stuff.
+
+Thanks for flashing my ROM and have a nice day!
