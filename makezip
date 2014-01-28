@@ -32,7 +32,7 @@ ui_print("     Other used sources:        ");
 ui_print("       CyanogenMod Team,        ");
 ui_print("      AndroidARMv6 Team,        ");
 ui_print("        Marvellous Team         ");
-ui_print("       and many others          ");
+ui_print("       and many others!          ");
 ui_print("================================");
 ui_print("");
 ui_print("");
@@ -41,17 +41,1172 @@ EOF
 
 #extract files
 cat << EOF >> updater-script
-ui_print("Formatting...");
+ui_print("|> Formatting...");
 format("yaffs2", "MTD", "system", "0", "/system");
-ui_print("Mounting...");
+ui_print("|> Mounting...");
 mount("yaffs2", "MTD", "system", "/system");
-ui_print("Extracting ROM...");
+mount("yaffs2", "MTD", "userdata", "/data");
+ui_print("|> Extracting ROM...");
 package_extract_dir("system", "/system");
+package_extract_dir("data", "/data");
 EOF
 
+#AROMA!
+cat << EOF >> updater-script
+	# Allshare
+    if
+      file_getprop("/tmp/aroma-data/systemapps.prop","item.1.1") == "1"
+    then
+      ui_print("|> Installing Ads Blocker - Hosts ....");
+	  package_extract_dir("stuff/Apps/System/Ads", "/system");
+    endif;	
+
+	# Allshare
+    if
+      file_getprop("/tmp/aroma-data/systemapps.prop","item.1.2") == "1"
+    then
+      ui_print("|> Installing Titanium Backup ....");
+	  package_extract_dir("stuff/Apps/System/Backup", "/data");
+    endif;	
+
+# Allshare
+    if
+      file_getprop("/tmp/aroma-data/systemapps.prop","item.1.3") == "1"
+    then
+      ui_print("|> Installing FM Radio ....");
+	  package_extract_dir("stuff/Apps/System/SpiritFM", "/data");
+    endif;	
+	
+	# Allshare
+    if
+      file_getprop("/tmp/aroma-data/systemapps.prop","item.1.4") == "1"
+    then
+      ui_print("|> Installing Live Wallpapers ....");
+	  package_extract_dir("stuff/Apps/System/LWP", "/system");
+    endif;	
+
+##################################################################################################################################	
+
+#Nova Launcher
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "1"
+	then
+ui_print("|> Installing Nova Launcher ....");
+		  package_extract_dir("stuff/Apps/launchers/nova", "/data");
+	endif;	
+	
+#Apex Launcher
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "2"
+	then
+ui_print("|> Installing Apex Launcher ....");
+		 package_extract_dir("stuff/Apps/launchers/apex", "/data");
+	endif;
+
+#Trebuchet Launcher
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "3"
+	then
+ui_print("|> Installing Trebuchet Launcher ....");
+		  package_extract_dir("stuff/Apps/launchers/nexus", "/data");
+	endif;	
+	
+#Holo Launcher HD	
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "4"
+	then
+ui_print("|> Installing Holo Launcher HD ....");
+		  package_extract_dir("stuff/Apps/launchers/touchwiz", "/data");
+	endif;	
+
+#Buzz Launcher	
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "5"
+	then
+ui_print("|> Installing Buzz Launcher ....");
+		  package_extract_dir("stuff/Apps/launchers/buzz", "/data");
+	endif;
+
+#Windows Launcher
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "6"
+	then
+ui_print("|> Installing Windows 8 Launcher ....");
+		  package_extract_dir("stuff/Apps/launchers/windows", "/data/app");
+	endif;	
+
+#Lightning Launcher	
+	if file_getprop("/tmp/aroma-data/launcher.prop","selected.1") == "7"
+	then
+ui_print("|> Installing Lightning Launcher (good decision BTW) ....");
+		  package_extract_dir("stuff/Apps/launchers/lightning", "/data");
+	endif;		
+
+
+##################################################################################################################################
+# Omich
+    if
+      file_getprop("/tmp/aroma-data/musicplayer.prop","selected.1") == "1"
+    then
+ui_print("|> Installing Omich Music Player ....");
+	  package_extract_dir("stuff/Apps/Music/Omich", "/data");
+    endif;	
+	
+# Apollo
+    if
+      file_getprop("/tmp/aroma-data/musicplayer.prop","selected.1") == "2"
+    then
+ui_print("|> Installing Apollo Music Player ....");
+	  package_extract_dir("stuff/Apps/Music/Apollo", "/data");
+    endif;	
+# Google Play Music
+    if
+      file_getprop("/tmp/aroma-data/musicplayer.prop","selected.1") == "3"
+    then
+ui_print("|> Installing Google Play Music ....");
+	  package_extract_dir("stuff/Apps/Music/Google", "/data");
+    endif;
+# Noozy Player Music
+  if
+    file_getprop("/tmp/aroma-data/musicplayer.prop","selected.1") == "4"
+    then
+ui_print("|> Installing Noozy Player Music ....");
+    package_extract_dir("stuff/Apps/Music/Noozy", "/data");
+   endif;
+
+##################################################################################################################################
+# ES
+    if
+      file_getprop("/tmp/aroma-data/filez.prop","selected.1") == "1"
+    then
+ui_print("|> Installing ES File Explorer ....");
+	  package_extract_dir("stuff/Apps/explorer/es", "/data");
+    endif;	
+	
+# CM
+    if
+      file_getprop("/tmp/aroma-data/filez.prop","selected.1") == "2"
+    then
+ui_print("|> Installing CM File Manager ....");
+	  package_extract_dir("stuff/Apps/explorer/cm", "/data");
+    endif;	
+# MIUI
+    if
+      file_getprop("/tmp/aroma-data/filez.prop","selected.1") == "3"
+    then
+ui_print("|> Installing MIUI File Manager ....");
+	  package_extract_dir("stuff/Apps/explorer/miui", "/data");
+    endif;
+# HF
+  if
+    file_getprop("/tmp/aroma-data/filez.prop","selected.1") == "4"
+    then
+ui_print("|> Installing H File Manager ....");
+    package_extract_dir("stuff/Apps/explorer/ha", "/data");
+   endif;
+# None of them
+  if
+    file_getprop("/tmp/aroma-data/filez.prop","selected.1") == "5"
+    then
+ui_print("|> Skipping installation of file explorer ....");
+   endif;
+##################################################################################################################################
+
+# Holo
+    if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "1"
+    then
+ui_print("|> Applying Stock CM10.1 Theme ....");
+    endif;	
+# Translucent
+    if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "2"
+    then
+ui_print("|> Applying Translucent Holo Theme....");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/translucent", "/system");
+    endif;
+# Full
+    if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "3"
+    then
+ui_print("|> Applying Full Holo Theme....");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/full", "/system");
+    endif;
+# Dust
+    if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "4"
+    then
+ui_print("|> Applying Dust Holo Theme...");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/dust", "/system");
+    endif;	
+
+#Sense5
+if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "5"
+    then
+ui_print("|> Applying Sense 5 Theme...");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/sense5", "/system");
+    endif;
+	
+#Lg Optimus 
+	if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "6"
+    then
+ui_print("|> Applying Lg Optimus UI Theme...");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/lg", "/system");
+    endif;
+	
+#Touchwiz
+if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "7"
+    then
+ui_print("|> Applying Touchwiz UX Theme...");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/touchwiz", "/system");
+    endif;	
+	
+#Sony Ui
+if
+      file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "8"
+    then
+ui_print("|> Applying Sony UI Theme...");
+	  delete("/system/build.prop");
+	  package_extract_dir("stuff/designs/xperia", "/system");
+    endif;		
+	
+
+
+###########################################################################
+#- Media
+
+    if
+      file_getprop("/tmp/aroma/media.prop","selected") == "1"
+    then
+      ui_print("@Installing full toneset..");
+      package_extract_dir("stuff/media_full", "/system/media");
+    else
+	  ui_print("@Installing slim toneset...");
+	  package_extract_dir("stuff/media_slimmed", "/system/media");
+    endif;
+###########################################################################
+#-
+#- Installing GPS tweaks
+#-
+ui_print("@GPS Configuration...");
+
+#Angola
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "1" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Angola/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Argentina
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "2" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Argentina/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Australia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "3" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Australia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Austria
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "4" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Austria/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Bangladesh
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "5" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Bangladesh/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Belarus
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "6" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Belarus/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Belgium
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "7" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Belgium/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Bosnia & Herzegovina
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "8" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Bosnia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Brazil
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "9" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Brazil/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Bulgaria
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "10" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Bulgaria/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Cambodia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "11" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Cambodia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Canada
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "12" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Canada/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Chile
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "13" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Chile/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#China
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "14" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/China/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Costa Rica
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "15" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Costa-Rica/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Croatia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "16" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Croatia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Czech Republic
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "17" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Czech-Republic/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Denmark
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "18" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Denmark/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#El Salvador
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "19" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Salvador/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Estonia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "20" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Estonia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Finland
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "21" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Finland/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#France
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "22" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/France/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Germany
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "23" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Germany/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Greece
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "24" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Greece/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Guatemala
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "25" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Guatemala/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Hong Kong
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "26" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Hong-Kong/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Hungary
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "27" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Hungary/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#India
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "28" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/India/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Indonesia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "29" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Indonesia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Iran
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "30" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Iran/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Ireland
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "31" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Ireland/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Israel
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "32" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Israel/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Italy
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "33" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Italy/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Japan
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "34" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Japan/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Korea
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "35" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Korea/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Kyrgyzstan
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "36" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Kyrgyzstan/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Latvia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "37" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Latvia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Lithuania
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "38" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Lithuania/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Luxembourg
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "39" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Luxembourg/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Macedonia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "40" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Macedonia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Madagascar
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "41" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Madagascar/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Malaysia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "42" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Malaysia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Mexico
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "43" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Mexico/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Moldova
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "44" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Moldova/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Netherlands
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "45" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Netherlands/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#New Caledonia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "46" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/New-Caledonia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#New Zealand
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "47" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/New Zealand/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Norway
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "48" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Norway/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Oman
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "49" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Oman/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Pakistan
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "50" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Pakistan/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Panama
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "51" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Panama/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Philippines
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "52" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Philippines/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Poland
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "53" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Poland/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Portugal
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "54" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Portugal/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Qatar
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "55" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Qatar/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Republic of Serbia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "56" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Serbia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Romania
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "57" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Romania/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Russian Federation
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "58" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Russia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Saudi Arabia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "59" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Saudi-Arabia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Singapore
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "60" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Singapore/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Slovakia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "61" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Slovakia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Slovenia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "62" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Slovenia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#South Africa
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "63" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/South-Africa/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Spain
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "64" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Spain/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Sri Lanka
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "65" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Srilanka/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Sweden
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "66" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Sweden/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Switzerland
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "67" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Switzerland/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Taiwan
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "68" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Taiwan/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Tanzania
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "69" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Tanzania/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Thailand
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "70" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Thailand/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Turkey
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "71" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Turkey/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Ukraine
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "72" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Ukraine/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#United Arab Emirates
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "73" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/United-Arab-Emirates/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#United Kingdom
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "74" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/United-Kingdom/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#United States of America
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "75" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/United-States/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Uzbekistan
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "76" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Uzbekistan/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Venezuela
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "77" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Venezuela/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Vietnam
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "78" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Vietnam/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Yugoslavia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.1") == "79" then
+ui_print("Setting up GPS for your country...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/Yugoslavia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+### Continents
+
+#Africa
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/Africa/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Asia
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/Asia/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Europe
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/Europe/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#North America
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/North-America/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#Oceania
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/Oceania/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+#South America
+if file_getprop("/tmp/aroma-data/gps.prop","selected.2") == "1" then
+ui_print("@Updating your gps.conf to match your continent....");
+ui_print("Deleting old configuration...");
+delete("/system/etc/gps.conf");
+ui_print("Copying gps.conf...");
+package_extract_dir("stuff/gpsconf/1.CONTINENTS/South-America/system", "/system");
+ui_print("gps.conf file updated, the gps is now more accurate and locks faster...");
+endif;
+
+##################################################################################################################################
+
+# INT2EXT
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "1"
+    then
+ui_print("|> Configuring INT2EXT ....");
+	  package_extract_dir("stuff/scripts/int2ext", "/system");
+	  set_perm(0, 0, 0755, "/system/etc/init.d/40int2ext");
+    endif;	
+# INT2EXT+
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "2"
+    then
+ui_print("|> Configuring INT2EXT+ ....");
+	  package_extract_dir("stuff/scripts/int2ext++", "/system");
+	  set_perm(0, 0, 0755, "/system/etc/init.d/40int2ext");
+    endif;
+# INT2EXTV2+
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "3"
+    then
+ui_print("|> Configuring INT2EXTV2+ ....");
+	  package_extract_dir("stuff/scripts/int2extv2+", "/system");
+	  set_perm(0, 0, 0755, "/system/etc/init.d/40int2ext");
+    endif;
+# S2E
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "4"
+    then
+ui_print("|> Installing S2E ....");
+	  package_extract_dir("/stuff/scripts/s2e", "/system");
+    endif;
+# Link2SD
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "5"
+    then
+ui_print("|> Installing Link2SD ....");
+	  package_extract_dir("/stuff/scripts/s2e", "/system");
+    endif;
+# Nothing
+    if
+      file_getprop("/tmp/aroma-data/move.prop","selected.1") == "6"
+    then
+ui_print("|> Skipping installation of apps2sd....");
+    endif;	
+	
+
+###################################################################################################################
+#### FONTS ####
+
+	# Roboto 4.0 Font
+    if
+      file_getprop("/tmp/aroma-data/fonts.prop","selected.1") == "1"
+    then
+      ui_print("@  Installing Stock Roboto Font");
+	  package_extract_dir("stuff/fonts/Stock", "/system/fonts");
+    endif;
+
+	# Roboto 4.3 Font
+    if
+      file_getprop("/tmp/aroma-data/fonts.prop","selected.1") == "2"
+    then
+      ui_print("@  Installing Roboto 4.3 Font");
+	  package_extract_dir("stuff/fonts/4.3", "/system/fonts");
+    endif;
+
+	# Ubuntu Font
+    if
+      file_getprop("/tmp/aroma-data/fonts.prop","selected.1") == "3"
+    then
+      ui_print("@  Installing Ubuntu Font");
+	  package_extract_dir("stuff/fonts/Ubuntu", "/system/fonts");
+    endif;
+
+	# Choco Cooky
+    if
+      file_getprop("/tmp/aroma-data/fonts.prop","selected.1") == "4"
+    then
+      ui_print("@  Installing Choco Cooky Font");
+	  package_extract_dir("stuff/fonts/Choco", "/system/fonts");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma-data/fonts.prop","selected.1") == "5"
+    then
+      ui_print("Installing DroidSerif font...");
+      package_extract_dir("stuff/fonts/UI/DroidSerif", "/system/fonts");
+    endif;
+
+##Music Sound Mod
+
+if
+		file_getprop("/tmp/aroma-data/beats.prop","item.0.1") == "1"
+	then
+	ui_print("-Flashing Clearaudio+ Engine...");
+	    package_extract_dir("stuff/soundmods/clearaudio/app", "/system/app");
+		package_extract_dir("stuff/soundmods/clearaudio/lib", "/system/lib");
+	endif;
+
+if
+		file_getprop("/tmp/aroma-data/beats.prop","item.0.2") == "1"
+	then
+	ui_print("-Flashing Dsp Manager Equalizer...");
+	    package_extract_dir("stuff/soundmods/dsp", "/system/app");
+	endif;
+
+if
+		file_getprop("/tmp/aroma-data/beats.prop","item.0.3") == "1"
+	then
+	ui_print("-Flashing NOOZXOIDE EIZO-REWIRE™PRO Equalizer...");
+	    package_extract_dir("stuff/soundmods/noozy", "/system/app");
+	endif;
+
+if
+		file_getprop("/tmp/aroma-data/beats.prop","item.0.4") == "1"
+	then
+	ui_print("- Flashing Viper Sound Engine...");
+	    package_extract_dir("stuff/soundmods/viper/app", "/system/app");
+		package_extract_dir("stuff/soundmods/viper/lib", "/system/lib");
+		package_extract_dir("stuff/soundmods/viper/vendor/etc", "/system/vendor/etc");
+	endif;
+	
+
+	# Mega Bass
+    if
+      file_getprop("/tmp/aroma-data/beats.prop","item.0.5") == "1"
+    then
+      ui_print("@  Installing Mega Bass Sound");
+	  package_extract_dir("stuff/soundmods/MegaBass", "/system");
+    endif;
+	
+if
+		file_getprop("/tmp/aroma-data/beats.prop","item.0.6") == "1"
+	then
+	ui_print("Skipping installation of SoundMODS...");
+	endif;
+EOF
 #symlinks
 cat << EOF >> updater-script
-ui_print("Symlinking...");
+ui_print("|> Symlinking...");
 symlink("Roboto-Bold.ttf", "/system/fonts/DroidSans-Bold.ttf");
 symlink("Roboto-Regular.ttf", "/system/fonts/DroidSans.ttf");
 symlink("busybox", "/system/xbin/[", "/system/xbin/[[",
@@ -151,7 +1306,7 @@ EOF
 
 #permissions
 cat << EOF >> updater-script
-ui_print("Setting permissions...");
+ui_print("|> Setting permissions...");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 0, 0755, 0755, "/system/addon.d");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
@@ -195,14 +1350,14 @@ package_extract_file("system/bin/modelid_cfg.sh", "/tmp/modelid_cfg.sh");
 set_perm(0, 0, 0777, "/tmp/modelid_cfg.sh");
 run_program("/tmp/modelid_cfg.sh", "");
 show_progress(0.200000, 10);
-ui_print("Flashing kernel...");
+ui_print("|> Flashing kernel...");
 package_extract_file("boot.img", "/tmp/boot.img");write_raw_image("/tmp/boot.img", "boot");
 EOF
 
 #finito!
 cat << EOF >> updater-script
 show_progress(0.100000, 0);
-ui_print("Finished! Enjoy!");
+ui_print("|> Finished! Enjoy!");
 unmount("/system");
 EOF
 
