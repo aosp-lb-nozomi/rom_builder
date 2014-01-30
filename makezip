@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# all credits go to utak3r! I forked his project and modified it to work with Marvellous CM10! :)
+
 # a little setup
 BUILD_OUTPUT=~/*/out/target/product/marvel
 ADDONS_DIR=./prebuilt
