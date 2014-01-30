@@ -212,14 +212,17 @@ ui_print("|> Skipping installation of file explorer ....");
     if
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "1"
     then
-ui_print("|> Applying Stock CM10.1 Theme ....");
+  # do practically nothing :P
+ui_print("|> Applying Stock CM10 Theme ....");
     endif;	
 # Translucent
     if
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "2"
     then
 ui_print("|> Applying Translucent Holo Theme....");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/translucent.sh", "/tmp/translucent.sh");
+	set_perm(0, 0, 0777, "/tmp/translucent.sh");
+	run_program("/tmp/translucent.sh");
 	  package_extract_dir("stuff/designs/translucent", "/system");
     endif;
 # Full
@@ -227,7 +230,9 @@ ui_print("|> Applying Translucent Holo Theme....");
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "3"
     then
 ui_print("|> Applying Full Holo Theme....");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/full.sh", "/tmp/full.sh");
+	set_perm(0, 0, 0777, "/tmp/full.sh");
+	run_program("/tmp/full.sh");
 	  package_extract_dir("stuff/designs/full", "/system");
     endif;
 # Dust
@@ -235,7 +240,9 @@ ui_print("|> Applying Full Holo Theme....");
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "4"
     then
 ui_print("|> Applying Dust Holo Theme...");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/dust.sh", "/tmp/dust.sh");
+	set_perm(0, 0, 0777, "/tmp/dust.sh");
+	run_program("/tmp/dust.sh");
 	  package_extract_dir("stuff/designs/dust", "/system");
     endif;	
 
@@ -244,7 +251,9 @@ if
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "5"
     then
 ui_print("|> Applying Sense 5 Theme...");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/sense5.sh", "/tmp/sense5.sh");
+	set_perm(0, 0, 0777, "/tmp/sense5.sh");
+	run_program("/tmp/sense5.sh")
 	  package_extract_dir("stuff/designs/sense5", "/system");
     endif;
 	
@@ -253,7 +262,9 @@ ui_print("|> Applying Sense 5 Theme...");
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "6"
     then
 ui_print("|> Applying Lg Optimus UI Theme...");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/lg.sh", "/tmp/lg.sh");
+	set_perm(0, 0, 0777, "/tmp/lg.sh");
+	run_program("/tmp/lg.sh");
 	  package_extract_dir("stuff/designs/lg", "/system");
     endif;
 	
@@ -262,7 +273,9 @@ if
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "7"
     then
 ui_print("|> Applying Touchwiz UX Theme...");
-	  delete("/system/build.prop");
+	package_extract_file("stuff/designs/touchwiz.sh", "/tmp/touchwiz.sh");
+	set_perm(0, 0, 0777, "/tmp/touchwiz.sh");
+	run_program("/tmp/touchwiz.sh");
 	  package_extract_dir("stuff/designs/touchwiz", "/system");
     endif;	
 	
@@ -271,8 +284,10 @@ if
       file_getprop("/tmp/aroma-data/theme.prop","selected.1") == "8"
     then
 ui_print("|> Applying Sony UI Theme...");
-	  delete("/system/build.prop");
-	  package_extract_dir("stuff/designs/xperia", "/system");
+	package_extract_file("stuff/designs/xperia.sh", "/tmp/xperia.sh");
+	set_perm(0, 0, 0777, "/tmp/xperia.sh");
+	run_program("/tmp/xperia.sh");
+	package_extract_dir("stuff/designs/xperia", "/system");
     endif;		
 	
 
