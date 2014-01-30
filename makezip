@@ -4,7 +4,7 @@
 BUILD_OUTPUT=~/*/out/target/product/marvel
 ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
-TIMESTAMP_INFO=`date +"%Y.%m.%d"`
+TIMESTAMP_INFO=`date +"%d-%m-%Y"`
 ZIPFILENAME=./cm-10-$TIMESTAMP-EXPERIMENTAL-marvel-MARVELLOUS-BETA0.zip
 
 function make_updater_script(){
