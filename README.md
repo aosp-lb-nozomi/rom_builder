@@ -1,4 +1,4 @@
-Marvellous CM10
+CM10 for LB for the Sony Xperia S
 ===========
 
-Scripts and tools for building Marvellous CM10
+Scripts and tools for building CM10 for LB
