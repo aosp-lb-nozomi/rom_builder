@@ -5,7 +5,7 @@
 
 # a little setup
 BUILD_OUTPUT=~/*/out/target/product/nozomi
-#ADDONS_DIR=./prebuilt
+ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%d-%m-%Y"`
 ZIPFILENAME=./cm-10-$TIMESTAMP-nozomi-LB-BETA0.zip
@@ -229,6 +229,10 @@ mv -f updater-script ./META-INF/com/google/android/updater-script
 # clean previous builds
 rm -rf ./system
 cp -r $BUILD_OUTPUT/system .
+
+# use letama's busybox
+rm ./system/xbin/busybox
+cp $ADDONS_DIR/busybox ./system/xbin/busybox
 
 # get rid of symlinks, but save them to a text file
 find ./system/bin -maxdepth 1 -type l -exec ls -lh {} \; > symlinks.txt
