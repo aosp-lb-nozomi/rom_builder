@@ -4,11 +4,11 @@
 # also many thanks to letama for getting CM10 for lB booting! 
 
 # a little setup
-BUILD_OUTPUT=~/*/out/target/product/nozomi
+BUILD_OUTPUT=~/*/out/target/product/aoba
 ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%d-%m-%Y"`
-ZIPFILENAME=./aokp-$TIMESTAMP-nozomi-LB-BETA0.zip
+ZIPFILENAME=./aokp-$TIMESTAMP-aoba-LB-BETA0.zip
 
 function make_updater_script(){
 
