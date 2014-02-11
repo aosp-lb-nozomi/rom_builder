@@ -14,10 +14,8 @@ function make_updater_script(){
 
 #headers
 cat << EOF > updater-script
-assert(getprop("ro.product.device") == "LT26i" || getprop("ro.build.product") == "LT26i" || 
-       getprop("ro.product.device") == "LT26ii" || getprop("ro.build.product") == "LT26ii" || 
-       getprop("ro.product.device") == "LT26" || getprop("ro.build.product") == "LT26" || 
-       getprop("ro.product.device") == "nozomi" || getprop("ro.build.product") == "nozomi");
+assert(getprop("ro.product.device") == "LT28h" || getprop("ro.build.product") == "LT28h" || 
+       getprop("ro.product.device") == "aoba" || getprop("ro.build.product") == "aoba");
 show_progress(0.500000, 0);
 
 ui_print("================================");
@@ -34,9 +32,9 @@ EOF
 #extract files
 cat << EOF >> updater-script
 ui_print("|> Formatting...");
-format("ext4", "EMMC", "/dev/block/mmcblk0p12", "0", "/system");
+format("ext4", "EMMC", "/dev/block/mmcblk0p15", "0", "/system");
 ui_print("|> Mounting...");
-mount("ext4", "EMMC", "/dev/block/mmcblk0p12", "/system");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p15", "/system");
 ui_print("|> Extracting ROM...");
 package_extract_dir("system", "/system");
 EOF

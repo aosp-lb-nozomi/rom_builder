@@ -31,13 +31,13 @@ prepare_start () {
 	## /data/idd
 	umount -l /dev/block/mmcblk0p10
 	## /data
-	umount -l /dev/block/mmcblk0p14
+	umount -l /dev/block/mmcblk0p17
 	## /cache
-	umount -l /dev/block/mmcblk0p13
+	umount -l /dev/block/mmcblk0p16
 	## /sdcard
 	umount -l /mnt/sdcard
 	umount -l /sdcard
-	umount -l /dev/block/mmcblk0p15
+	umount -l /dev/block/mmcblk0p18
 	
 	## try hard way
 	umount -f /data/idd
