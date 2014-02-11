@@ -188,9 +188,6 @@ set_perm(0, 0, 0644, "/tmp/backuptool.functions");
 run_program("/tmp/backuptool.sh", "restore");
 delete("/system/bin/backuptool.sh");
 delete("/system/bin/backuptool.functions");
-package_extract_file("system/bin/modelid_cfg.sh", "/tmp/modelid_cfg.sh");
-set_perm(0, 0, 0777, "/tmp/modelid_cfg.sh");
-run_program("/tmp/modelid_cfg.sh", "");
 EOF
 
 #CM for LB
