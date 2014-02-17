@@ -103,7 +103,7 @@ then
     then
 	tar -xf /tmp/recovery.tar
 	rm /tmp/recovery.tar
-	rm /tmp/cm.tar
+	rm /tmp/aosp.tar
     fi
 
     # trigger red LED
@@ -125,11 +125,11 @@ sleep 1
 
 prepare_start
 
-# extract cm initramfs
-if [ -f /tmp/cm.tar ]
+# extract aosp initramfs
+if [ -f /tmp/aosp.tar ]
 then
-    tar -xf /tmp/cm.tar
-    rm /tmp/cm.tar
+    tar -xf /tmp/aosp.tar
+    rm /tmp/aosp.tar
     rm /tmp/recovery.tar
 fi
 
