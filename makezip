@@ -218,7 +218,7 @@ cp $ADDONS_DIR/CameraMixedBlobs/liboemcamera.so ./system/lib/liboemcamera.so
 cp $ADDONS_DIR/Gallery2.apk ./system/app/Gallery2.apk
 
 # use new ramdisk
-cp -R $BUILD_OUTPUT/combinedroot/aosp.tar ./lb-and-wifi
+cp -R $BUILD_OUTPUT/combinedroot/aosp.tar ./lb-and-wifi/bin/aosp.tar
 
 # get rid of symlinks, but save them to a text file
 find ./system/bin -maxdepth 1 -type l -exec ls -lh {} \; > symlinks.txt
