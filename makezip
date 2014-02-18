@@ -8,18 +8,14 @@ BUILD_OUTPUT=~/*/out/target/product/aoba
 ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%d-%m-%Y"`
-ZIPFILENAME=./aokp-$TIMESTAMP-aoba-LB-BETA0.zip
+ZIPFILENAME=./cna-$TIMESTAMP-aoba-LB-BETA0.zip
 
 function make_updater_script(){
 
 #headers
 cat << EOF > updater-script
-assert(getprop("ro.product.device") == "LT28h" || getprop("ro.build.product") == "LT28h" || 
-       getprop("ro.product.device") == "aoba" || getprop("ro.build.product") == "aoba");
-show_progress(0.500000, 0);
-
 ui_print("================================");
-ui_print("      'AOKP for LB'   ");
+ui_print(" 'CodeNameAndroid 3.6.5 for LB' ");
 ui_print("");
 ui_print("");
 ui_print("   Build date: $TIMESTAMP_INFO  ");
@@ -37,6 +33,7 @@ ui_print("|> Mounting...");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p15", "/system");
 ui_print("|> Extracting ROM...");
 package_extract_dir("system", "/system");
+show_progress(0.500000, 0);
 EOF
 
 #symlinks
@@ -144,11 +141,9 @@ cat << EOF >> updater-script
 ui_print("|> Setting permissions...");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
-set_perm(0, 1000, 0750, "/system/bin/iptables");
 set_perm(0, 3003, 02750, "/system/bin/netcfg");
 set_perm(0, 3004, 02755, "/system/bin/ping");
 set_perm(0, 2000, 06750, "/system/bin/run-as");
-set_perm(0, 1000, 0750, "/system/bin/tc");
 set_perm_recursive(1002, 1002, 0755, 0440, "/system/etc/bluetooth");
 set_perm(0, 0, 0755, "/system/etc/bluetooth");
 set_perm(1000, 1000, 0640, "/system/etc/bluetooth/auto_pairing.conf");
@@ -170,7 +165,6 @@ set_perm(0, 0, 06755, "/system/xbin/librank");
 set_perm(0, 0, 06755, "/system/xbin/procmem");
 set_perm(0, 0, 06755, "/system/xbin/procrank");
 set_perm(0, 0, 06755, "/system/xbin/su");
-set_perm_recursive(0, 0, 0755, 0555, "/system/etc/init.d");
 show_progress(0.200000, 10);
 EOF
 
