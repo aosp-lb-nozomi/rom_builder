@@ -81,6 +81,9 @@ echo '255' > /sys/class/leds/blue/brightness
 echo '0' > /sys/class/leds/red/brightness
 echo '0' > /sys/class/leds/green/brightness
 
+# Trigger vibration
+echo '250' > /sys/class/timed_output/vibrator/enable
+
 # wait for vol+/vol- keys 
 cat /dev/input/event0 > /dev/keycheck&
 cat /dev/input/event3 > /dev/keycheck2&
