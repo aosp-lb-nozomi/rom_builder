@@ -8,7 +8,7 @@ BUILD_OUTPUT=~/*/out/target/product/nozomi
 ADDONS_DIR=./prebuilt
 TIMESTAMP=`date +"%Y%m%d"`
 TIMESTAMP_INFO=`date +"%d-%m-%Y"`
-ZIPFILENAME=./cm-10-$TIMESTAMP-nozomi-LB-BETA0.zip
+ZIPFILENAME=./mk-$TIMESTAMP-nozomi-LB-BETA0.zip
 
 function make_updater_script(){
 
@@ -28,7 +28,7 @@ unmount("/system");
 show_progress(0.500000, 0);
 
 ui_print("================================");
-ui_print("      'CyanogenMod 10 for LB'   ");
+ui_print("      'MokeeOS for LB'   ");
 ui_print("");
 ui_print("");
 ui_print("   Build date: $TIMESTAMP_INFO  ");
@@ -177,6 +177,7 @@ set_perm(0, 0, 06755, "/system/xbin/librank");
 set_perm(0, 0, 06755, "/system/xbin/procmem");
 set_perm(0, 0, 06755, "/system/xbin/procrank");
 set_perm(0, 0, 06755, "/system/xbin/su");
+set_perm(0, 0, 06755, "/system/xbin/tcpdump");
 EOF
 
 #kernel and some random stuff
