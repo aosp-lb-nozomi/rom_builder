@@ -106,7 +106,7 @@ then
     then
 	tar -xf /tmp/recovery.tar
 	rm /tmp/recovery.tar
-	rm /tmp/slim.tar
+	rm /tmp/cm.tar
     fi
 
     # trigger red LED
@@ -129,10 +129,10 @@ sleep 1
 prepare_start
 
 # extract cm initramfs
-if [ -f /tmp/slim.tar ]
+if [ -f /tmp/cm.tar ]
 then
-    tar -xf /tmp/slim.tar
-    rm /tmp/slim.tar
+    tar -xf /tmp/cm.tar
+    rm /tmp/cm.tar
     rm /tmp/recovery.tar
 fi
 
