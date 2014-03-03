@@ -234,9 +234,6 @@ cp $ADDONS_DIR/busybox ./system/xbin/busybox
 cp $ADDONS_DIR/CameraMixedBlobs/libcald_pal.so ./system/lib/libcald_pal.so
 cp $ADDONS_DIR/CameraMixedBlobs/liboemcamera.so ./system/lib/liboemcamera.so
 
-# use new ramdisk
-cp -R $BUILD_OUTPUT/combinedroot/slim.tar ./lb-and-wifi/bin/slim.tar
-
 # get rid of symlinks, but save them to a text file
 find ./system/bin -maxdepth 1 -type l -exec ls -lh {} \; > symlinks.txt
 find ./system/bin -maxdepth 1 -type l -exec rm -f {} \;
